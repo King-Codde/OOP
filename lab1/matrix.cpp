@@ -14,24 +14,22 @@ Tmatrix::Tmatrix()
 }
 
 
-Tmatrix::Tmatrix(int size)
+Tmatrix::Tmatrix(int size) : matrix_size(size)
 {
-    number ** temp_matrix = new number*[size];
+    number ** temp_matrix = new number*[matrix_size];
 
-    for(int i=0; i < size; i++) {
-        temp_matrix[i] = new number [size];
-        for(int j=0; j<size; j++) {
+    for(int i=0; i < matrix_size; i++) {
+        temp_matrix[i] = new number [matrix_size];
+        for(int j=0; j< matrix_size; j++) {
             number temp_num;
             std::cin >> temp_num;
             temp_matrix[i][j] = temp_num;
         }
     }
-
     matrix = temp_matrix;
-    matrix_size = size;
 }
 
-std::ostream& operator<< (std::ostream& os, Tmatrix& m){
+std::ostream& operator<< (std::ostream& os, const Tmatrix& m){
     for(int i=0; i<m.matrix_size; i++){
         for(int j=0; j<m.matrix_size; j++){
             os << m.matrix[i][j] << " ";
@@ -44,7 +42,7 @@ std::ostream& operator<< (std::ostream& os, Tmatrix& m){
 
 
 
-number Tmatrix::det(){
+number Tmatrix::det() const {
     const double EPS = 1E-9;
 
     number** temp_matrix = new number*[matrix_size];
@@ -90,7 +88,7 @@ number Tmatrix::det(){
 
 
 
-void Tmatrix::transepose(){
+void Tmatrix::transpose(){
     number ** temp_matrix = new number*[matrix_size];
     for(int i=0; i < matrix_size; i++) {
         temp_matrix[i] = new number [matrix_size];
@@ -102,7 +100,7 @@ void Tmatrix::transepose(){
     matrix = temp_matrix;
 }
 
-int Tmatrix::rank(){
+int Tmatrix::rank() const {
     const double EPS = 1E-9;
 
     number** temp_matrix = new number*[matrix_size];

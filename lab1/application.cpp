@@ -10,11 +10,11 @@ Tapplication::Tapplication()
 }
 
 
-int Tapplication::exec(){
-    int ch;
+int Tapplication::exec() const {
     int matrix_size = 2;
     Tmatrix new_matrix;
     while (true){
+        int ch;
         ch = menu();
 
         switch (ch) {
@@ -31,7 +31,7 @@ int Tapplication::exec(){
                 std::cout << "det(matrix):" << new_matrix.det() << std::endl;
                 break;
             case 3:{
-                new_matrix.transepose();
+                new_matrix.transpose();
                 std::cout << "transpose(matrix):" << std::endl;
                 std::cout << new_matrix;
                 break;
@@ -54,14 +54,14 @@ int Tapplication::exec(){
 
 
 
-int Tapplication::menu(){
-    int ch;
+int Tapplication::menu() const {
     std::cout << "1 - operation create(matrix)" << std::endl;
     std::cout << "2 - operation dict(matrix)" << std::endl;
     std::cout << "3 - operation transepose(matrix)" << std::endl;
     std::cout << "4 - operation rank(matrix)" << std::endl;
     std::cout << "5 - operation print(matrix)" << std::endl;
     std::cout << "0 - exit" << std::endl << "> ";
+    int ch;
     std::cin >> ch;
     return ch;
 }

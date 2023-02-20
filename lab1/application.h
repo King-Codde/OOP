@@ -6,10 +6,10 @@ class Tapplication
 {
 public:
     Tapplication();
-    int exec();
+    int exec() const;
 
 private:
-    int menu();
+    int menu() const;
 };
 
 #endif // TAPPLICATION_H

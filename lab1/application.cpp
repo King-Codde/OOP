@@ -31,7 +31,7 @@ int Tapplication::exec() const {
                 std::cout << "det(matrix):" << new_matrix.det() << std::endl;
                 break;
             case 3:{
-                new_matrix.transepose();
+                new_matrix.transpose();
                 std::cout << "transpose(matrix):" << std::endl;
                 std::cout << new_matrix;
                 break;

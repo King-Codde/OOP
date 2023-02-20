@@ -88,7 +88,7 @@ number Tmatrix::det(){
 
 
 
-void Tmatrix::transepose(){
+void Tmatrix::transpose(){
     number ** temp_matrix = new number*[matrix_size];
     for(int i=0; i < matrix_size; i++) {
         temp_matrix[i] = new number [matrix_size];

@@ -10,8 +10,8 @@ class Tmatrix
 public:
     Tmatrix();
     Tmatrix(int);
-    number det();
-    int rank();
+    number det() const;
+    int rank() const;
     void transpose();
     friend std::ostream& operator<< (std::ostream&, const Tmatrix&);
     ~Tmatrix();

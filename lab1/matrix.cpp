@@ -42,7 +42,7 @@ std::ostream& operator<< (std::ostream& os, const Tmatrix& m){
 
 
 
-number Tmatrix::det(){
+number Tmatrix::det() const {
     const double EPS = 1E-9;
 
     number** temp_matrix = new number*[matrix_size];
@@ -100,7 +100,7 @@ void Tmatrix::transpose(){
     matrix = temp_matrix;
 }
 
-int Tmatrix::rank(){
+int Tmatrix::rank() const {
     const double EPS = 1E-9;
 
     number** temp_matrix = new number*[matrix_size];

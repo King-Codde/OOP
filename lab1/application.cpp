@@ -55,13 +55,13 @@ int Tapplication::exec(){
 
 
 int Tapplication::menu(){
-    int ch;
     std::cout << "1 - operation create(matrix)" << std::endl;
     std::cout << "2 - operation dict(matrix)" << std::endl;
     std::cout << "3 - operation transepose(matrix)" << std::endl;
     std::cout << "4 - operation rank(matrix)" << std::endl;
     std::cout << "5 - operation print(matrix)" << std::endl;
     std::cout << "0 - exit" << std::endl << "> ";
+    int ch;
     std::cin >> ch;
     return ch;
 }

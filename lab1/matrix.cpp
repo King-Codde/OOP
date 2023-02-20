@@ -31,7 +31,7 @@ Tmatrix::Tmatrix(int size)
     matrix_size = size;
 }
 
-std::ostream& operator<< (std::ostream& os, Tmatrix& m){
+std::ostream& operator<< (std::ostream& os, const Tmatrix& m){
     for(int i=0; i<m.matrix_size; i++){
         for(int j=0; j<m.matrix_size; j++){
             os << m.matrix[i][j] << " ";

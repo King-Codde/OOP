@@ -13,7 +13,7 @@ public:
     number det();
     int rank();
     void transepose();
-    friend std::ostream& operator<< (std::ostream&, Tmatrix&);
+    friend std::ostream& operator<< (std::ostream&, const Tmatrix&);
     ~Tmatrix();
 };
 

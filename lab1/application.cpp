@@ -10,7 +10,7 @@ Tapplication::Tapplication()
 }
 
 
-int Tapplication::exec(){
+int Tapplication::exec() const {
     int ch;
     int matrix_size = 2;
     Tmatrix new_matrix;
@@ -54,7 +54,7 @@ int Tapplication::exec(){
 
 
 
-int Tapplication::menu(){
+int Tapplication::menu() const {
     std::cout << "1 - operation create(matrix)" << std::endl;
     std::cout << "2 - operation dict(matrix)" << std::endl;
     std::cout << "3 - operation transepose(matrix)" << std::endl;

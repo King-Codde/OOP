@@ -11,10 +11,10 @@ Tapplication::Tapplication()
 
 
 int Tapplication::exec() const {
-    int ch;
     int matrix_size = 2;
     Tmatrix new_matrix;
     while (true){
+        int ch;
         ch = menu();
 
         switch (ch) {

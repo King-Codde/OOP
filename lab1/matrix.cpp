@@ -29,7 +29,33 @@ Tmatrix::Tmatrix(int size) : matrix_size(size)
     matrix = temp_matrix;
 }
 
-std::ostream& operator<< (std::ostream& os, const Tmatrix& m){
+
+Tmatrix::Tmatrix(const Tmatrix & ref_matrix) {
+    number ** temp_matrix = new number*[ref_matrix.matrix_size];
+
+    for (int i = 0; i < ref_matrix.matrix_size; i++){
+        temp_matrix[i] = new number [ref_matrix.matrix_size];
+        for (int j = 0; j < ref_matrix.matrix_size; j++){
+            temp_matrix[i][j] = ref_matrix.matrix[i][j];
+        }
+    }
+
+    matrix = temp_matrix;
+    matrix_size = ref_matrix.matrix_size;
+}
+
+
+Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
+    for (int i = 0; i < matrix_size; i++){
+        for (int j = 0; j < matrix_size; j++){
+            matrix[i][j] = ref_matrix.matrix[i][j];
+        }
+    }
+    matrix_size = ref_matrix.matrix_size;
+    return *this;
+}
+
+std::ostream& operator<< (std::ostream& os, const Tmatrix& m) {
     for(int i=0; i<m.matrix_size; i++){
         for(int j=0; j<m.matrix_size; j++){
             os << m.matrix[i][j] << " ";
@@ -88,7 +114,7 @@ number Tmatrix::det() const {
 
 
 
-void Tmatrix::transpose(){
+void Tmatrix::transpose() {
     number ** temp_matrix = new number*[matrix_size];
     for(int i=0; i < matrix_size; i++) {
         temp_matrix[i] = new number [matrix_size];
@@ -146,5 +172,8 @@ int Tmatrix::rank() const {
 }
 
 Tmatrix::~Tmatrix(){
-
+    for (int i = 0; i < matrix_size; i++){
+        delete [] matrix[i];
+    }
+    delete [] matrix;
 }

@@ -48,6 +48,25 @@ Tmatrix::Tmatrix(const Tmatrix & ref_matrix) {
 Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
     if(this == &ref_matrix)
         return *this;
+
+
+    if(ref_matrix.matrix_size != matrix_size) {
+
+        for (int i = 0; i < matrix_size; i++){
+            delete [] matrix [i];
+        }
+        delete [] matrix;
+
+        matrix = new number*[ref_matrix.matrix_size];
+        for (int i = 0; i < ref_matrix.matrix_size; i++){
+            matrix[i] = new number [ref_matrix.matrix_size];
+            for (int j = 0; j < ref_matrix.matrix_size; j++){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+
     for (int i = 0; i < matrix_size; i++){
         for (int j = 0; j < matrix_size; j++){
             matrix[i][j] = ref_matrix.matrix[i][j];

@@ -1,0 +1,7 @@
+*.stash
+debug
+.qtc_clangd
+*.user
+Makefile
+*.Debug
+*.Release

@@ -60,9 +60,6 @@ Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
         matrix = new number*[ref_matrix.matrix_size];
         for (int i = 0; i < ref_matrix.matrix_size; i++){
             matrix[i] = new number [ref_matrix.matrix_size];
-            for (int j = 0; j < ref_matrix.matrix_size; j++){
-                matrix[i][j] = 0;
-            }
         }
     }
 

@@ -67,8 +67,8 @@ Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
     }
 
 
-    for (int i = 0; i < matrix_size; i++){
-        for (int j = 0; j < matrix_size; j++){
+    for (int i = 0; i < ref_matrix.matrix_size; i++){
+        for (int j = 0; j < ref_matrix.matrix_size; j++){
             matrix[i][j] = ref_matrix.matrix[i][j];
         }
     }

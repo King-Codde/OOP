@@ -46,6 +46,8 @@ Tmatrix::Tmatrix(const Tmatrix & ref_matrix) {
 
 
 Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
+    if(this == &ref_matrix)
+        return *this;
     for (int i = 0; i < matrix_size; i++){
         for (int j = 0; j < matrix_size; j++){
             matrix[i][j] = ref_matrix.matrix[i][j];

@@ -11,21 +11,6 @@ class Tmatrix
 public:
     Tmatrix();
     Tmatrix(int);
-
-    Tmatrix(int _n,int)
-    {
-        matrix_size = _n;
-
-        matrix = (number**) new number*[matrix_size];
-
-        for (int i = 0; i < matrix_size; i++)
-          matrix[i] = (number*)new number[matrix_size];
-
-        for (int i = 0; i < matrix_size; i++)
-          for (int j = 0; j < matrix_size; j++)
-            matrix[i][j] = 1;
-    }
-
     Tmatrix(const Tmatrix&);
     void copy(number** mass);
     number det() const;

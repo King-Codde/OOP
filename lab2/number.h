@@ -2,6 +2,6 @@
 #define NUMBER_H
 
 #include "TComplex.h"
-typedef double number;
+typedef TComplex number;
 
 #endif // NUMBER_H

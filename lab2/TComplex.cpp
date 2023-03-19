@@ -28,6 +28,13 @@ TComplex operator/(const TComplex& lhv, const TComplex& rhv) {
             (rhv.re_ * lhv.im_ - lhv.re_ * rhv.im_) / (rhv.re_ * rhv.re_ + lhv.im_ * lhv.im_)};
 }
 
+
+bool operator==(const TComplex& lhv,const TComplex& rhv){
+    return lhv.im_==rhv.im_ && lhv.re_==rhv.re_;
+}
+bool operator!=(const TComplex& lhv, const TComplex& rhv){
+    return !(lhv.im_==rhv.im_ && lhv.re_==rhv.re_);
+}
 std::istream& operator >>(std::istream& str, TComplex& num) {
     str >> num.re_;
     str >> num.im_;

@@ -2,14 +2,13 @@
 #include "number.h"
 #include <vector>
 
-using namespace std;
 Tmatrix::Tmatrix()
 {
     matrix = new number*[matrix_size];
     for(int i=0; i<matrix_size; i++) {
         matrix[i] = new number [matrix_size];
         for(int j=0; j<matrix_size; j++) {
-            matrix[i][j] = {1, 0};
+            matrix[i][j] = 1;
         }
     }
 }
@@ -22,9 +21,7 @@ Tmatrix::Tmatrix(int size) : matrix_size(size)
     for(int i=0; i < matrix_size; i++) {
         temp_matrix[i] = new number [matrix_size];
         for(int j=0; j< matrix_size; j++) {
-            number temp_num;
-            std::cin >> temp_num;
-            temp_matrix[i][j] = temp_num;
+            temp_matrix[i][j] = 1;
         }
     }
     matrix = temp_matrix;
@@ -49,8 +46,24 @@ Tmatrix::Tmatrix(const Tmatrix & ref_matrix) {
 Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
     if(this == &ref_matrix)
         return *this;
-    for (int i = 0; i < matrix_size; i++){
-        for (int j = 0; j < matrix_size; j++){
+
+
+    if(ref_matrix.matrix_size != matrix_size) {
+
+        for (int i = 0; i < matrix_size; i++){
+            delete [] matrix [i];
+        }
+        delete [] matrix;
+
+        matrix = new number*[ref_matrix.matrix_size];
+        for (int i = 0; i < ref_matrix.matrix_size; i++){
+            matrix[i] = new number [ref_matrix.matrix_size];
+        }
+    }
+
+
+    for (int i = 0; i < ref_matrix.matrix_size; i++){
+        for (int j = 0; j < ref_matrix.matrix_size; j++){
             matrix[i][j] = ref_matrix.matrix[i][j];
         }
     }
@@ -69,49 +82,58 @@ std::ostream& operator<< (std::ostream& os, const Tmatrix& m) {
 }
 
 
-
-
-number Tmatrix::det() const {
-    TComplex EPS = {1E-9, 1E-9};
-
-    number** temp_matrix = new number*[matrix_size];
-    for(int i=0; i < matrix_size; i++) {
-        temp_matrix[i] = new number [matrix_size];
-        for(int j=0; j<matrix_size; j++) {
-            temp_matrix[i][j] = matrix[i][j];
+void Tmatrix::copy(number** mass)
+{
+    for (int i = 0; i < matrix_size; i++)
+    {
+        for (int j = 0; j < matrix_size; j++)
+        {
+            matrix[i][j] = mass[i][j];
         }
     }
+}
 
 
-    TComplex det = 1;
 
-    for (int i=0; i<matrix_size; ++i) {
-        int k = i;
-        for (int j=i+1; j<matrix_size; ++j)
-            if (abs (temp_matrix[j][i]) > abs (temp_matrix[k][i]))
-                k = j;
-        if (abs (temp_matrix[k][i]) < EPS) {
-            det = 0;
-            break;
+
+
+number Tmatrix::det() const{
+    if ( matrix_size == 1)
+        return matrix[0][0];
+    else if ( matrix_size == 2)
+    {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+
+    else {
+        number d = 0;
+        for (int k = 0; k < matrix_size; k++) {
+            number** m = new number*[ matrix_size-1];
+            for (int i = 0; i <  matrix_size - 1; i++) {
+               m[i] = new number[ matrix_size - 1];
+            }
+
+            for (int i = 1; i <  matrix_size; i++) {
+               int t = 0;
+               for (int j = 0; j <  matrix_size; j++) {
+                   if (j == k)
+                       continue;
+                   m[i-1][t] = matrix[i][j];
+                   t++;
+               }
+            }
+            Tmatrix Minor(matrix_size-1);
+            Minor.copy(m);
+
+            d = d + pow(-1, k + 2) * matrix[0][k] * Minor.det();
+            for (int i = 0; i <  matrix_size-1; i++)
+            {
+                delete[] m[i];
+            }
+            delete [] m;
         }
-        std::swap (temp_matrix[i], temp_matrix[k]);
-        if (i != k)
-            det = -det;
-        det = temp_matrix[i][i] * det;
-        for (int j=i+1; j<matrix_size; ++j)
-            temp_matrix[i][j] = temp_matrix[i][i] / temp_matrix[i][j];
-        for (int j=0; j<matrix_size; ++j)
-            if (j != i && abs(temp_matrix[j][i]) > EPS)
-                for (int k=i+1; k<matrix_size; ++k)
-                    temp_matrix[j][k] = temp_matrix[j][k] - temp_matrix[i][k] * temp_matrix[j][i];
+        return d;
     }
-
-    for (int i = 0; i < matrix_size; i++){
-        delete [] temp_matrix[i];
-    }
-    delete [] temp_matrix;
-
-    return det;
 }
 
 
@@ -129,7 +151,10 @@ void Tmatrix::transpose() {
     matrix = temp_matrix;
 }
 
-int Tmatrix::rankMatrix(){
+
+
+int Tmatrix::rank() const {
+
     number** temp_matrix = new number*[matrix_size];
     for(int i=0; i < matrix_size; i++) {
         temp_matrix[i] = new number [matrix_size];
@@ -138,39 +163,39 @@ int Tmatrix::rankMatrix(){
         }
     }
 
-
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < matrix_size; i++)
     {
         if (temp_matrix[i][i] == 0)
         {
-            for (int j = i + 1; j < 4; j++)
+            for (int j = i + 1; j < matrix_size; j++)
             {
                 if (temp_matrix[j][i] != 0)
                 {
-                    swap(temp_matrix[i], temp_matrix[j]);
+                    std::swap(temp_matrix[i], temp_matrix[j]);
                     break;
                 }
             }
         }
 
+
         if (temp_matrix[i][i] != 0)
         {
-            for (int j = i + 1; j < 4; j++)
+            for (int j = i + 1; j < matrix_size; j++)
             {
-                int c = temp_matrix[j][i] / temp_matrix[i][i];
-                for (int k = i; k < 4; k++)
+                auto c = temp_matrix[j][i] / temp_matrix[i][i];
+                for (int k = i; k < matrix_size; k++)
                 {
-                    temp_matrix[j][k] -= c * temp_matrix[i][k];
+                    temp_matrix[j][k] =temp_matrix[j][k] -  c * temp_matrix[i][k];
                 }
             }
         }
     }
 
     int rank = 0;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < matrix_size; i++)
     {
         bool nonzero = false;
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < matrix_size; j++)
         {
             if (temp_matrix[i][j] != 0)
             {
@@ -179,46 +204,6 @@ int Tmatrix::rankMatrix(){
             }
         }
         if (nonzero) rank++;
-    }
-
-    return rank;
-}
-
-int Tmatrix::rank() const {
-    TComplex EPS = {1E-9, 1E-9};
-
-    number** temp_matrix = new number*[matrix_size];
-    for(int i=0; i < matrix_size; i++) {
-        temp_matrix[i] = new number [matrix_size];
-        for(int j=0; j<matrix_size; j++) {
-            temp_matrix[i][j] = matrix[i][j];
-        }
-    }
-
-    int rank = matrix_size;
-    std::vector<char> line_used (matrix_size);
-    for (int i=0; i<matrix_size; ++i) {
-
-        int j;
-
-        for (j=0; j<matrix_size; ++j)
-            if (!line_used[j] && abs(temp_matrix[j][i]) > EPS)
-                break;
-
-        if (j == matrix_size)
-            --rank;
-        else {
-            line_used[j] = true;
-
-            for (int p=i+1; p<matrix_size; ++p)
-                temp_matrix[j][p] = temp_matrix[j][p] / temp_matrix[j][i];
-
-            for (int k=0; k<matrix_size; ++k)
-                if (k != j && abs(temp_matrix[k][i]) > EPS)
-                    for (int p=i+1; p<matrix_size; ++p)
-                        temp_matrix[k][p] = temp_matrix[k][p] - temp_matrix[j][p] * temp_matrix[k][i];
-
-        }
     }
 
     for (int i = 0; i < matrix_size; i++){

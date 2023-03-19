@@ -129,6 +129,61 @@ void Tmatrix::transpose() {
     matrix = temp_matrix;
 }
 
+int Tmatrix::rankMatrix(){
+    number** temp_matrix = new number*[matrix_size];
+    for(int i=0; i < matrix_size; i++) {
+        temp_matrix[i] = new number [matrix_size];
+        for(int j=0; j<matrix_size; j++) {
+            temp_matrix[i][j] = matrix[i][j];
+        }
+    }
+
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (temp_matrix[i][i] == 0)
+        {
+            for (int j = i + 1; j < 4; j++)
+            {
+                if (temp_matrix[j][i] != 0)
+                {
+                    swap(temp_matrix[i], temp_matrix[j]);
+                    break;
+                }
+            }
+        }
+
+        if (temp_matrix[i][i] != 0)
+        {
+            for (int j = i + 1; j < 4; j++)
+            {
+                int c = temp_matrix[j][i] / temp_matrix[i][i];
+                for (int k = i; k < 4; k++)
+                {
+                    temp_matrix[j][k] -= c * temp_matrix[i][k];
+                }
+            }
+        }
+    }
+
+    int rank = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        bool nonzero = false;
+        for (int j = 0; j < 4; j++)
+        {
+            if (temp_matrix[i][j] != 0)
+            {
+                nonzero = true;
+                break;
+            }
+        }
+        if (nonzero) rank++;
+    }
+
+    return rank;
+}
+
 int Tmatrix::rank() const {
     TComplex EPS = {1E-9, 1E-9};
 

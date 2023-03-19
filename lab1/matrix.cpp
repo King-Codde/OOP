@@ -144,8 +144,9 @@ void Tmatrix::transpose() {
     matrix = temp_matrix;
 }
 
+
+
 int Tmatrix::rank() const {
-    const double EPS = 1E-9;
 
     number** temp_matrix = new number*[matrix_size];
     for(int i=0; i < matrix_size; i++) {
@@ -155,30 +156,47 @@ int Tmatrix::rank() const {
         }
     }
 
-    int rank = matrix_size;
-    std::vector<char> line_used (matrix_size);
-    for (int i=0; i<matrix_size; ++i) {
-
-        int j;
-
-        for (j=0; j<matrix_size; ++j)
-            if (!line_used[j] && std::abs(temp_matrix[j][i]) > EPS)
-                break;
-
-        if (j == matrix_size)
-            --rank;
-        else {
-            line_used[j] = true;
-
-            for (int p=i+1; p<matrix_size; ++p)
-                temp_matrix[j][p] /= temp_matrix[j][i];
-
-            for (int k=0; k<matrix_size; ++k)
-                if (k != j && std::abs(temp_matrix[k][i]) > EPS)
-                    for (int p=i+1; p<matrix_size; ++p)
-                        temp_matrix[k][p] -= temp_matrix[j][p] * temp_matrix[k][i];
-
+    for (int i = 0; i < matrix_size; i++)
+    {
+        if (temp_matrix[i][i] == 0)
+        {
+            for (int j = i + 1; j < matrix_size; j++)
+            {
+                if (temp_matrix[j][i] != 0)
+                {
+                    std::swap(temp_matrix[i], temp_matrix[j]);
+                    break;
+                }
+            }
         }
+
+
+        if (temp_matrix[i][i] != 0)
+        {
+            for (int j = i + 1; j < matrix_size; j++)
+            {
+                int c = temp_matrix[j][i] / temp_matrix[i][i];
+                for (int k = i; k < matrix_size; k++)
+                {
+                    temp_matrix[j][k] -= c * temp_matrix[i][k];
+                }
+            }
+        }
+    }
+
+    int rank = 0;
+    for (int i = 0; i < matrix_size; i++)
+    {
+        bool nonzero = false;
+        for (int j = 0; j < matrix_size; j++)
+        {
+            if (temp_matrix[i][j] != 0)
+            {
+                nonzero = true;
+                break;
+            }
+        }
+        if (nonzero) rank++;
     }
 
     for (int i = 0; i < matrix_size; i++){

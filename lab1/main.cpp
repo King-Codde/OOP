@@ -1,5 +1,6 @@
 #include <iostream>
 #include "application.h"
+#include "matrix.h"
 
 using namespace std;
 
@@ -10,5 +11,4 @@ int main()
 
 
     return a.exec();
-
 }

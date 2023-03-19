@@ -84,49 +84,58 @@ std::ostream& operator<< (std::ostream& os, const Tmatrix& m) {
 }
 
 
-
-
-number Tmatrix::det() const {
-    const double EPS = 1E-9;
-
-    number** temp_matrix = new number*[matrix_size];
-    for(int i=0; i < matrix_size; i++) {
-        temp_matrix[i] = new number [matrix_size];
-        for(int j=0; j<matrix_size; j++) {
-            temp_matrix[i][j] = matrix[i][j];
+void Tmatrix::copy(number** mass)
+{
+    for (int i = 0; i < matrix_size; i++)
+    {
+        for (int j = 0; j < matrix_size; j++)
+        {
+            matrix[i][j] = mass[i][j];
         }
     }
+}
 
 
-    double det = 1;
 
-    for (int i=0; i<matrix_size; ++i) {
-        int k = i;
-        for (int j=i+1; j<matrix_size; ++j)
-            if (std::abs (temp_matrix[j][i]) > std::abs (temp_matrix[k][i]))
-                k = j;
-        if (std::abs (temp_matrix[k][i]) < EPS) {
-            det = 0;
-            break;
+
+
+number Tmatrix::det() const{
+    if ( matrix_size == 1)
+        return matrix[0][0];
+    else if ( matrix_size == 2)
+    {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+
+    else {
+        number d = 0;
+        for (int k = 0; k < matrix_size; k++) {
+            number** m = new number*[ matrix_size-1];
+            for (int i = 0; i <  matrix_size - 1; i++) {
+               m[i] = new number[ matrix_size - 1];
+            }
+
+            for (int i = 1; i <  matrix_size; i++) {
+               int t = 0;
+               for (int j = 0; j <  matrix_size; j++) {
+                   if (j == k)
+                       continue;
+                   m[i-1][t] = matrix[i][j];
+                   t++;
+               }
+            }
+            Tmatrix Minor(matrix_size-1,0);
+            Minor.copy(m);
+
+            d = d + pow(-1, k + 2) * matrix[0][k] * Minor.det();
+            for (int i = 0; i <  matrix_size-1; i++)
+            {
+                delete[] m[i];
+            }
+            delete [] m;
         }
-        std::swap (temp_matrix[i], temp_matrix[k]);
-        if (i != k)
-            det = -det;
-        det *= temp_matrix[i][i];
-        for (int j=i+1; j<matrix_size; ++j)
-            temp_matrix[i][j] /= temp_matrix[i][i];
-        for (int j=0; j<matrix_size; ++j)
-            if (j != i && std::abs(temp_matrix[j][i]) > EPS)
-                for (int k=i+1; k<matrix_size; ++k)
-                    temp_matrix[j][k] -= temp_matrix[i][k] * temp_matrix[j][i];
+        return d;
     }
-
-    for (int i = 0; i < matrix_size; i++){
-        delete [] temp_matrix[i];
-    }
-    delete [] temp_matrix;
-
-    return det;
 }
 
 

@@ -21,9 +21,7 @@ Tmatrix::Tmatrix(int size) : matrix_size(size)
     for(int i=0; i < matrix_size; i++) {
         temp_matrix[i] = new number [matrix_size];
         for(int j=0; j< matrix_size; j++) {
-            number temp_num;
-            std::cin >> temp_num;
-            temp_matrix[i][j] = temp_num;
+            temp_matrix[i][j] = 1;
         }
     }
     matrix = temp_matrix;
@@ -124,7 +122,7 @@ number Tmatrix::det() const{
                    t++;
                }
             }
-            Tmatrix Minor(matrix_size-1,0);
+            Tmatrix Minor(matrix_size-1);
             Minor.copy(m);
 
             d = d + pow(-1, k + 2) * matrix[0][k] * Minor.det();

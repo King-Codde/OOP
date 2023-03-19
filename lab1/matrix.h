@@ -33,6 +33,9 @@ public:
     void transpose();
     Tmatrix& operator= (const Tmatrix&);
     friend std::ostream& operator<< (std::ostream&, const Tmatrix&);
+    void get(int i, int j, number num){
+        matrix[i][j] = num;
+    }
     ~Tmatrix();
 };
 

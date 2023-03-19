@@ -22,6 +22,13 @@ int Tapplication::exec() const {
                 std::cout << "matrix_size = ";
                 std::cin >> matrix_size;
                 Tmatrix m(matrix_size);
+                for(int i=0; i < matrix_size; i++) {
+                    for(int j=0; j< matrix_size; j++) {
+                        number temp_num;
+                        std::cin >> temp_num;
+                        m.get(i,j,temp_num);
+                    }
+                }
                 std::cout << "New matrix:" << std::endl;
                 std::cout << m;
                 new_matrix = m;

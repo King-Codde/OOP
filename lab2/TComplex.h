@@ -17,6 +17,8 @@ public:
     friend TComplex operator-(const TComplex& lhv, const TComplex& rhv);
     friend TComplex operator*(const TComplex& lhv, const TComplex& rhv);
     friend TComplex operator/(const TComplex& lhv, const TComplex& rhv);
+    friend bool operator==(const TComplex& lhv, const TComplex& rhv);
+    friend bool operator!=(const TComplex& lhv, const TComplex& rhv);
 
     friend std::istream& operator >>(std::istream& str, TComplex& num);
     friend std::ostream& operator <<(std::ostream& str, const TComplex& num);

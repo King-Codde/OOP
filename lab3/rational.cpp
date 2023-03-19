@@ -66,3 +66,8 @@ TRational operator/ (const TRational& lhv, const TRational& rhv) {
     ret.normalize();
     return ret;
 }
+
+std::ostream& operator<<(std::ostream& str, const TRational& num) {
+    str << '(' << num.numerator_ << '/' << num.denuminator_ << ')';
+    return str;
+}

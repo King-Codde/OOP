@@ -11,11 +11,14 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     interface.cpp \
-    rational.cpp
+    rational.cpp \
+    matrix.cpp
 
 HEADERS += \
     interface.h \
-    rational.h
+    rational.h \
+    matrix.h \
+    number.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

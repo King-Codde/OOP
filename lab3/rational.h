@@ -1,6 +1,7 @@
 #ifndef TRATIONAL_H
 #define TRATIONAL_H
 
+#include <iostream>
 
 class TRational
 {
@@ -26,6 +27,8 @@ public:
     friend TRational operator- (const TRational& lhv, const TRational& rhv);
     friend TRational operator* (const TRational& lhv, const TRational& rhv);
     friend TRational operator/ (const TRational& lhv, const TRational& rhv);
+
+    friend std::ostream& operator<<(std::ostream& str, const TRational& num);
 
     ~TRational() = default;
 };

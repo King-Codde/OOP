@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TInterface</class>
+ <widget class="QWidget" name="TInterface">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>796</width>
+    <height>641</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lab work No. 3</string>
+  </property>
+  <widget class="QLineEdit" name="matrix_size_edit">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>20</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="transpose_button">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>130</y>
+     <width>88</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Transpose</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="det_button">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>210</y>
+     <width>88</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Det</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rank_button">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>290</y>
+     <width>88</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Rank</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="matrix_size_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Matrix size:</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="matrix_table">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>501</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="tabletTracking">
+    <bool>false</bool>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="gridStyle">
+    <enum>Qt::SolidLine</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>false</bool>
+   </property>
+   <property name="cornerButtonEnabled">
+    <bool>true</bool>
+   </property>
+   <property name="rowCount">
+    <number>0</number>
+   </property>
+   <property name="columnCount">
+    <number>0</number>
+   </property>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>50</number>
+   </attribute>
+   <attribute name="horizontalHeaderDefaultSectionSize">
+    <number>50</number>
+   </attribute>
+   <attribute name="verticalHeaderMinimumSectionSize">
+    <number>50</number>
+   </attribute>
+   <attribute name="verticalHeaderDefaultSectionSize">
+    <number>50</number>
+   </attribute>
+  </widget>
+  <widget class="QLabel" name="matrix_size_label_2">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>20</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string> Matrix data:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="matrix_data_edit">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>20</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="new_matrix_button">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>20</y>
+     <width>88</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>New matrix</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>490</y>
+     <width>41</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Result: </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="result_text">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>490</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="close_button">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>590</y>
+     <width>88</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>new_matrix_button</sender>
+   <signal>clicked()</signal>
+   <receiver>TInterface</receiver>
+   <slot>new_matrix()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>transpose_button</sender>
+   <signal>clicked()</signal>
+   <receiver>TInterface</receiver>
+   <slot>transpose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>det_button</sender>
+   <signal>clicked()</signal>
+   <receiver>TInterface</receiver>
+   <slot>det()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rank_button</sender>
+   <signal>clicked()</signal>
+   <receiver>TInterface</receiver>
+   <slot>rank()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>close_button</sender>
+   <signal>clicked()</signal>
+   <receiver>TInterface</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>733</x>
+     <y>606</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>320</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>new_matrix()</slot>
+  <slot>det()</slot>
+  <slot>transpose()</slot>
+  <slot>rank()</slot>
+ </slots>
+</ui>

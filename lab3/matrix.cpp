@@ -42,6 +42,9 @@ Tmatrix::Tmatrix(const Tmatrix & ref_matrix) {
     matrix_size = ref_matrix.matrix_size;
 }
 
+int Tmatrix::size() const {
+    return matrix_size;
+}
 
 Tmatrix& Tmatrix::operator= (const Tmatrix& ref_matrix) {
     if(this == &ref_matrix)
@@ -212,6 +215,18 @@ int Tmatrix::rank() const {
     delete [] temp_matrix;
 
     return rank;
+}
+
+void Tmatrix::set(int i, int j, const number& num) {
+    matrix[i][j] = num;
+}
+
+const number& Tmatrix::get(int i, int j) const {
+    return matrix[i][j];
+}
+
+number& Tmatrix::get(int i, int j) {
+    return matrix[i][j];
 }
 
 Tmatrix::~Tmatrix(){

@@ -1,4 +1,4 @@
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,14 +11,14 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     interface.cpp \
-    rational.cpp \
-    matrix.cpp
+    matrix.cpp \
+    rational.cpp
 
 HEADERS += \
     interface.h \
-    rational.h \
     matrix.h \
-    number.h
+    number.h \
+    rational.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -12,15 +12,16 @@ public:
     Tmatrix();
     Tmatrix(int);
     Tmatrix(const Tmatrix&);
+    int size() const;
     void copy(number** mass);
     number det() const;
     int rank() const;
     void transpose();
     Tmatrix& operator= (const Tmatrix&);
     friend std::ostream& operator<< (std::ostream&, const Tmatrix&);
-    void get(int i, int j, number num){
-        matrix[i][j] = num;
-    }
+    void set(int i, int j, const number& num);
+    const number& get(int i, int j) const;
+    number& get(int i, int j);
     ~Tmatrix();
 };
 

@@ -12,7 +12,7 @@ void TRational::normalize() {
 
 TRational::TRational() : numerator_(0), denuminator_(1) { }
 
-TRational::TRational(int numerator) : numerator_(numerator) { }
+TRational::TRational(int numerator) : numerator_(numerator), denuminator_(1) { }
 
 TRational::TRational(int numerator, int denuminator) : numerator_(numerator), denuminator_(denuminator) { };
 

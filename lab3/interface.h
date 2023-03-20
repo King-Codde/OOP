@@ -1,21 +1,30 @@
-#ifndef TINTERFACE_H
-#define TINTERFACE_H
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 #include <QWidget>
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
+#include "matrix.h"
+
+namespace Ui {
+class TInterface;
+}
 
 class TInterface : public QWidget
 {
     Q_OBJECT
 
-    QLabel* name_numerator_;
-    QLabel* name_denumerator_;
-    QLineEdit numerator_text_;
-    QLineEdit denumerator_text_;
 public:
-    TInterface(QWidget *parent = nullptr);
+    explicit TInterface(QWidget *parent = nullptr);
     ~TInterface();
+
+public slots:
+    void new_matrix();
+    void det();
+    void transpose();
+    void rank();
+
+private:
+    Ui::TInterface *ui;
+    Tmatrix matrix;
 };
-#endif // TINTERFACE_H
+
+#endif // INTERFACE_H

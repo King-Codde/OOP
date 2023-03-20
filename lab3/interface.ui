@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Lab work No. 3</string>
   </property>
   <widget class="QLineEdit" name="matrix_size_edit">
    <property name="geometry">

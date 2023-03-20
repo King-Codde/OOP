@@ -3,34 +3,35 @@
 
 TComplex::TComplex(double re, double im) : re_(re), im_(im) { }
 
-TComplex::TComplex(double re) : re_(re) { };
+TComplex::TComplex(double re) : re_(re), im_(0) { };
 
 TComplex::TComplex() : re_(0), im_(0) { }
 
-TComplex TComplex::operator-() const {
-    return {-re_, -im_};
-};
+//TComplex TComplex::operator-() const {
+//    return {-re_, -im_};
+//};
 
 TComplex operator+(const TComplex& lhv, const TComplex& rhv) {
-    return {lhv.re_ + lhv.re_, rhv.im_ + rhv.im_};
+    return {lhv.re_ + rhv.re_, lhv.im_ + rhv.im_};
 }
 
 TComplex operator-(const TComplex& lhv, const TComplex& rhv) {
-    return {lhv.re_ - lhv.re_, rhv.im_ - rhv.im_};
+    return {lhv.re_ - rhv.re_, lhv.im_ - rhv.im_};
 }
 
 TComplex operator*(const TComplex& lhv, const TComplex& rhv) {
-    return {lhv.re_ * lhv.re_ - rhv.re_ * rhv.re_, lhv.re_ * rhv.im_ + rhv.re_ * lhv.im_};
+    return {lhv.re_ * rhv.re_ - lhv.im_ * rhv.im_, lhv.re_ * rhv.im_ + rhv.re_ * lhv.im_};
 }
 
 TComplex operator/(const TComplex& lhv, const TComplex& rhv) {
-    return {(lhv.re_ * lhv.re_ + rhv.im_ * rhv.im_) / (rhv.re_ * rhv.re_ + lhv.im_ * lhv.im_),
-            (rhv.re_ * lhv.im_ - lhv.re_ * rhv.im_) / (rhv.re_ * rhv.re_ + lhv.im_ * lhv.im_)};
+    return {(lhv.re_ * rhv.re_ + lhv.im_ * rhv.im_) / (rhv.re_ * rhv.re_ + rhv.im_ * rhv.im_),
+            (rhv.re_ * lhv.im_ - lhv.re_ * rhv.im_) / (rhv.re_ * rhv.re_ + rhv.im_ * rhv.im_)};
 }
 
 
 bool operator==(const TComplex& lhv,const TComplex& rhv){
-    return lhv.im_==rhv.im_ && lhv.re_==rhv.re_;
+    TComplex temp(lhv);
+    return temp.im_==rhv.im_ && temp.re_==rhv.re_;
 }
 bool operator!=(const TComplex& lhv, const TComplex& rhv){
     return !(lhv.im_==rhv.im_ && lhv.re_==rhv.re_);

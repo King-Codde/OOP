@@ -185,7 +185,7 @@ int Tmatrix::rank() const {
                 auto c = temp_matrix[j][i] / temp_matrix[i][i];
                 for (int k = i; k < matrix_size; k++)
                 {
-                    temp_matrix[j][k] =temp_matrix[j][k] -  c * temp_matrix[i][k];
+                    temp_matrix[j][k] = temp_matrix[j][k] -  c * temp_matrix[i][k];
                 }
             }
         }

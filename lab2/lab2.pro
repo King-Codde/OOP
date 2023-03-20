@@ -8,18 +8,15 @@ CONFIG -= app_bundle
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 HEADERS += \
     TComplex.h \
-    TRational.h \
     application.h \
     matrix.h \
     number.h
 
 SOURCES += \
         TComplex.cpp \
-        TRational.cpp \
         main.cpp \
         application.cpp \
         matrix.cpp
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

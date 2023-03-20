@@ -1,7 +1,8 @@
-#include "rational.h"
 #include <limits>
 #include <numeric>
 #include <cmath>
+
+#include "rational.h"
 
 void TRational::normalize() {
     auto gcd = std::gcd(numerator_, denuminator_);
@@ -71,3 +72,10 @@ std::ostream& operator<<(std::ostream& str, const TRational& num) {
     str << '(' << num.numerator_ << '/' << num.denuminator_ << ')';
     return str;
 }
+
+std::istream& operator>>(std::istream& str, TRational& num) {
+    str >> num.numerator_;
+    str >> num.denuminator_;
+    num.normalize();
+    return str;
+};

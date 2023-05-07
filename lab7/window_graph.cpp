@@ -21,15 +21,14 @@ void window_graph::paintEvent(QPaintEvent*) {
 
     //Рисуем вершины графа
     QVector<QVector<double>> points;
+    QVector<QVector<double>> points_centre;
     int vertex = 1;
-    point_in_elipse(points, 230, 230, 200, graph->m->len());
-    for(auto i: points){
+    point_in_elipse(points_centre, 230, 230, 200, graph->m->len());
+    for(auto i: points_centre){
         painter.drawEllipse(i[0], i[1], 40, 40);
         painter.drawText(i[0]+15,i[1]+25,QString::number(vertex));
         vertex+=1;
     }
-
-    points.clear();
 
     QBrush brush;
     brush.setColor(Qt::black);
@@ -38,10 +37,7 @@ void window_graph::paintEvent(QPaintEvent*) {
     point_in_elipse(points, 250, 250, 180, graph->m->len());
     for (auto i =0; i < graph->m->len();i++){
         for (auto j=0; j < graph->m->len(); j++){
-            if (graph->m->get(i,j) == 1 and i!=j){
-                if(i >= j && graph->m->get(j,i) == 1){
-                    break;
-                }
+            if (graph->m->get(i,j) == 1 && i!=j){
                 QPoint start(QPoint(points[i][0],points[i][1]));
                 QPoint end(QPoint(points[j][0],points[j][1]));
                 painter.drawLine(start, end);
@@ -51,14 +47,21 @@ void window_graph::paintEvent(QPaintEvent*) {
 
                 // Рисуем стрелку
                 int arrow_len = 20;
-                QPoint arrow_p1(end.x() - arrow_len * std::cos(angle - M_PI / 15), end.y() - arrow_len * std::sin(angle - M_PI / 15));
-                QPoint arrow_p2(end.x() - arrow_len * std::cos(angle + M_PI / 15), end.y() - arrow_len * std::sin(angle + M_PI / 15));
+                QPoint arrow_p1(end.x() - arrow_len * std::cos(angle - M_PI / 18), end.y() - arrow_len * std::sin(angle - M_PI / 18));
+                QPoint arrow_p2(end.x() - arrow_len * std::cos(angle + M_PI / 18), end.y() - arrow_len * std::sin(angle + M_PI / 18));
                 QPolygonF arrowHead;
 
                 arrowHead << end << arrow_p1 << arrow_p2;
 
                 painter.drawPolygon(arrowHead);
 
+            }
+        }
+        if(graph->m->get(i,i) == 1){
+            if (points_centre[i][1] <= -points_centre[i][0] + 500){
+                painter.drawArc(points_centre[i][0] - 10,points_centre[i][1] - 10, 20, 20,0,270*16);
+            } else {
+                painter.drawArc(points_centre[i][0] + 39.5,points_centre[i][1] + 9.8, 20, 20,270*13.5,270*16);
             }
         }
     }

@@ -16,9 +16,10 @@ class interface_window : public QWidget {
 public:
     interface_window();
     ~interface_window();
-    void wread_file();
     bool data_checking(QString);
     void open_graph_window();
+public slots:
+    void wread_file();
 private:
     QWidget *interface;
     QLabel *result;

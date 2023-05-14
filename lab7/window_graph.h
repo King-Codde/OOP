@@ -16,9 +16,9 @@
 class window_graph : public QWidget {
      Q_OBJECT
 public:
-     window_graph(directed_graph*);
+    window_graph(directed_graph*);
     ~window_graph();
-     void point_in_elipse(QVector<QVector<double>>&, int, int, int, int);
+    void point_in_elipse(QVector<QVector<double>>&, int, int, int, int);
 private:
     QWidget *interface;
     directed_graph* graph;

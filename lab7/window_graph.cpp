@@ -19,7 +19,6 @@ void window_graph::paintEvent(QPaintEvent*) {
     painter.setPen(pen);
     painter.setBrush(QBrush(Qt::white));
 
-    //Рисуем вершины графа
     QVector<QVector<double>> points;
     QVector<QVector<double>> points_centre;
     int vertex = 1;
@@ -42,10 +41,8 @@ void window_graph::paintEvent(QPaintEvent*) {
                 QPoint end(QPoint(points[j][0],points[j][1]));
                 painter.drawLine(start, end);
 
-                // Считаем угол между линией и осью X
                 double angle = std::atan2(end.y() - start.y(), end.x() - start.x());
 
-                // Рисуем стрелку
                 int arrow_len = 20;
                 QPoint arrow_p1(end.x() - arrow_len * std::cos(angle - M_PI / 18), end.y() - arrow_len * std::sin(angle - M_PI / 18));
                 QPoint arrow_p2(end.x() - arrow_len * std::cos(angle + M_PI / 18), end.y() - arrow_len * std::sin(angle + M_PI / 18));

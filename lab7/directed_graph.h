@@ -7,10 +7,10 @@
 class directed_graph
 {
 public:
-    directed_graph(int);
-    ~directed_graph();
+    directed_graph(int n){m = new matrix<qint16>(n);}
+    ~directed_graph(){delete m;}
 public:
-    matrix *m;
+    matrix<qint16> *m;
 };
 
 #endif // DIRECTED_GRAPH_H

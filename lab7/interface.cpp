@@ -46,8 +46,9 @@ void interface_window::wread_file(){
 }
 
 bool interface_window::data_checking(QString str){
-    str.replace("\r\n", " ");
-    QStringList list = str.split(" ");
+    str.replace("\r", " ");
+    str.replace("\n", " ");
+    QStringList list = str.split(" ", Qt::SkipEmptyParts);
     for(auto i : list){
         if(i!="0" && i!="1"){
             return false;
